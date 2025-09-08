@@ -1,6 +1,9 @@
 a = (45,65,95,75,35,11)
+for i in a:
+    print(i +1)
 
-print(a)
+
+print("the insdex of 1 is ", a[2])
 
 # a[3] =66 well get error cause it does not allow changes
 
