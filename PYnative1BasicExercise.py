@@ -168,22 +168,88 @@ while number > 0:
     print(result, end=" ")
 
 print() 
-
+5
 if reverse == original:
     print("It is a palindrome")
 else:
-    print("Not a palindrome")
+    print("Not a palindrome") 
+
 
 '''
 
-#17
+#17  to print the fibananci series
+
+
+#18
+'''
+
 
 year =int(input("Enter the year"))
 
-if year %4==0:
-    print("leap year")
-else:
-    print("Not a leap year")
+if year %4==0: 
+    print("leap year") 
+else:  
+    print("Not a leap year")  
+'''
+
+#19
+'''
+for i in range(1,20):
+    if i>1 and i%2==1:
+        for j in range(2,i):
+            if(i%j) == 0:
+                break
+
+        else:
+            print(i ,end = " ")
+'''
+
+#20
+'''
+def print_pattern(rows):
+    for i in range(1,rows +1):
+        for j in range(rows-i +1):
+            print(i, end =" ")
+        print()
+
+print_pattern(5)
+'''
+#21
+
+#22
+
+'''
+string = "i am loki"
+capital =string.title()
+print(capital)
+'''
+#23
+'''
+for i in range(5,0,-1):
+    print(f"Time remaining : {i} seconds")
+
+#demo 
+for i in range(5,0,-1):
+    print("*" *i)
+
+#demo
+for i in range(1,6):
+    print(str(i) *i)
+
+#demo
+for i in range(1,6):
+    for j in range(1,i+1):
+        print(j,end =" ")
+    print()
+
+''' 
+
+
+
+
+
+
+
 
 
 
