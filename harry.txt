@@ -1,0 +1,14 @@
+hello world
+Sandeep here froma cumen velocity 
+with 2 years of experience .
+Acumen Translation Hub provides self-service translations 
+in 135 languages for organizations that require real-time document translations.
+
+pip install virtualenv
+pip install pandas
+.\env1\Scripts\Activate.ps1 #every time run thiss
+deactivate # the deactivate the Varitual env1
+
+pip install requests
+
+
