@@ -128,7 +128,8 @@ while 20 in list1:
 
 print(list1)
 
-'''
+''' 
+
 
 #14
 '''
@@ -139,6 +140,67 @@ only_numbers = [x for x in my_list if isinstance(x,int)]
 print(only_numbers)
 
 '''
+#15
+'''
+nested_list = [[10, 20, 30], [44, 55, 66], [77, 87, 99]]
+
+element=nested_list[1][1]
+print(element)
+
+'''
+
+#16
+'''
+
+list_of_lists = [[1, 2], [3, 4], [5, 6, 7]]
+
+flat_list = [item for sublist in list_of_lists for item in sublist]
+
+print(flat_list)
+
+'''
+
+#17
+'''
+list1 = ["M", "na", "i", "Ke"]
+list2 = ["y", "me", "s", "lly"]
+list3 = [i+j for i,j in zip(list1,list2)]
+print(list3)
+'''
+
+#18
+'''
+list1 = ["Hello ", "take "]
+list2 = ["Dear", "Sir"]
+list3 = [i+j for i in list1 for j in list2]
+
+print(list3)
+'''
+
+#19
+'''
+list1 = [10, 20, 30, 40]
+list2 = [100, 200, 300, 400]
+
+for i,j in zip(list1,list2[::-1]):
+    print(i,j)
+
+'''
+
+#21
+'''
+list1 = [10, 20, [300, 400, [5000, 6000], 500], 30, 40]
+
+list1[2][2].append(7000)
+print(list1)
+
+'''
+
+#22
+
+
+
+
 
 
 
