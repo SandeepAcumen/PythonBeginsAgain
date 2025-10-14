@@ -51,6 +51,7 @@ print(school_bus.seating_capacity())
 '''
 
 #5 
+
 '''
 class Vehicle:
     color = "White"
@@ -95,22 +96,7 @@ print("Total Bus Fare is: ",School_bus.fare())
 
 '''
 
-#7
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#7 
 
 
 
