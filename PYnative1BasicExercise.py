@@ -54,7 +54,8 @@ c =str_x.count("Emma")
 print(f"Emma appeared {c} Times")
 
    ''' 
-
+str_x = "Emma is good developer. Emma is a writer"
+str_x.count("Emma")
 #8
 '''
 for num in range(6):
@@ -104,6 +105,12 @@ while number> 0:
     digit = number %10
     number = number // 10
     print(digit,end  =" ")
+
+    or
+
+    number =1234
+    rev = int(str(number)[::-1])
+    print(rev)
 '''
 #12
 '''
