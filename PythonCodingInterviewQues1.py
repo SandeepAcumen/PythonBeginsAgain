@@ -1,4 +1,5 @@
- # Beginner Level
+#https://github.com/Tanu-N-Prabhu/Python/blob/master/Python%20Coding%20Interview%20Prep/Python%20Coding%20Interview%20Questions%20(Beginner%20to%20Advanced).md 
+# Beginner Level
 
 #1. What is Python??
 #2. How is Python Interpreted?
@@ -373,6 +374,113 @@ print(first_non_repeating_character("swiss"))
    # class is created throughout the entire program.
    #No matter how many times you create an object — you 
    # always get the same instance.
+
+#40. Explain Pythons garbage collection mechanism?
+   #Python uses a garbage collection mechanism based on 
+   # reference counting and a cyclic garbage collector to 
+   # detect and collect cycles
+
+#41. What are Pythons's Magic methods?
+   #Magic methods are special methods with double underscores
+   #at the beginning and end.They enable the customization of 
+   #behavior for standard operation.
+   #1. __init__ : Constrctor
+   #2. __str__ : String representation
+   #3. Addition operator
+
+#42. How do you handle multi-threading in Python?
+   #code example
+'''
+import threading
+import time
+
+def print_number():
+    for i in range(5):
+        print(i)
+        time.sleep(1)
+
+def print_letter():
+    for c in "ABCDEFGH":
+        print(c)
+        time.sleep(1)
+
+t1 = threading.Thread(target=print_number)
+t2 = threading.Thread(target=print_letter)
+t1.start()
+t2.start()
+
+'''
+
+#43. What are Python's coroutine functions?
+'''
+import asyncio
+
+async def say_hello():
+    await asyncio.sleep(3)
+    print("Hello")
+
+asyncio.run(say_hello())
+ 
+'''
+
+#44. Explain the Pythons's global Interpreter Lock(GIL)
+
+#45. What are metaclasses in Python???
+  
+'''
+A metaclass in Python is a class of a class that defines 
+how a class behaves.Classes themselves are instances of metaclasses.
+You can customize class creation by defining a metaclass, such as modifying 
+class properties, adding methods, or implementing design patterns.
+
+'''
+
+#46. Can you explain the difference between deepcopy and copy in Python?
+
+'''
+copy.copy() creates a shallow copy of an object. It copies the object's 
+structure but not the elements themselves, meaning it only copies references
+ for mutable objects.
+
+copy.deepcopy() creates a deep copy of the object, including recursively 
+copying all objects contained within the original object. Changes made to 
+the deep-copied object do not affect the original object.
+
+
+'''
+
+#47. Describe Python’s __slots__ and its benefits.
+
+#48. What is the difference between is and == in Python?
+
+#49. Find the Longest Consecutive Sequence in an Unsorted List?
+
+#=========== Most Frequently Asked Python Questions by Big Tech Companies======
+
+#1. Longest Substring Without Repeating Characters
+'''
+class Python:
+    def longest_substring(s):
+        start =0
+        max_length = 0
+        seen = {}
+
+        for i,char in enumerate(s):
+            if char in seen and seen[char] >= start:
+                start = seen[char] + 1
+
+            seen[char] = i
+            max_length = max(max_length, i -start +1)
+
+        return max_length
+    
+
+print(Python.longest_substring("abcabcbb"))
+print(Python.longest_substring("pwwkew"))
+
+'''
+
+
 
 
 
