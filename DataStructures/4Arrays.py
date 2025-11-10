@@ -115,12 +115,71 @@ print(arr)
 
 '''
 
+#6. Bubble Sort(simple and clear)
+#Repeatedly swap adjacent elements if they are in the wrong order
+'''
+arr=[5,2,9,1,5,6]
+n = len(arr)
 
+for i in range(n):
+    for j in range(0,n-i-1):
+        if arr[j] > arr[j+1]:
+            arr[j], arr[j+1] = arr[j+1], arr[j]
 
+print("Sorted array:",arr)
 
+'''
 
+#7.Selection Sort
+#Find the smallest element and move it to the front
+'''
+arr=[5,2,9,1,5,6]
 
+n =len(arr)
+for i in range(n):
+    min_index = i
+    for j in range(i+1, n):
+        if arr[j] < arr[min_index]:
+            min_index = j
+    arr[i], arr[min_index] = arr[min_index], arr[i]
 
+print("Sorted array:",arr)
+
+'''
+
+#8. Insertion sort
+#Build the sorted list one element at a time
+'''
+arr= [5,2,9,1,5,6]
+
+for i in range(1,len(arr)):
+    key  = arr[i]
+    j =i -1
+    while j >= 0 and key < arr[j]:
+        arr[j+1] = arr[j]
+        j -=1
+    arr[j+1] = key
+
+print("Sorted array:",arr)
+
+'''
+
+#Advantages
+'''
+1.Random access elements
+2.Easy sorting and iteration
+3.Replacement of multiple variables
+
+'''
+
+#Dis-advantages
+'''
+1. Size is fixed
+2.Difficult to insert and deleted
+3.If capacity is more and occupancy less, most of the array gets wasted
+4.Need contiguous memory
+
+'''
 
 
 
