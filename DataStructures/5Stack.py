@@ -19,6 +19,7 @@
 
 '''
 #Implementation using List
+
 '''
 stack = []
 stack.append("abc")
@@ -27,6 +28,35 @@ stack.pop()
 print(stack)
 
 '''
+
+#Implementation using collection deque
+'''
+from collections import deque
+
+stack =deque()
+stack.append("K")
+print(stack)
+stack.append("M")
+stack.append("Y")
+
+print(stack)
+
+'''
+#Implementation using queue
+'''
+from queue import LifoQueue
+stack = LifoQueue()
+stack.put(2)
+stack.put(3)
+stack.put(4)
+print(stack.qsize())
+print(stack.full())
+stack.get()
+print(stack.full())
+
+'''
+
+
 
 
 
