@@ -117,6 +117,7 @@ print(arr)
 
 #6. Bubble Sort(simple and clear)
 #Repeatedly swap adjacent elements if they are in the wrong order
+
 '''
 arr=[5,2,9,1,5,6]
 n = len(arr)
@@ -132,6 +133,7 @@ print("Sorted array:",arr)
 
 #7.Selection Sort
 #Find the smallest element and move it to the front
+
 '''
 arr=[5,2,9,1,5,6]
 
@@ -149,6 +151,7 @@ print("Sorted array:",arr)
 
 #8. Insertion sort
 #Build the sorted list one element at a time
+
 '''
 arr= [5,2,9,1,5,6]
 
@@ -165,6 +168,7 @@ print("Sorted array:",arr)
 '''
 
 #Advantages
+
 '''
 1.Random access elements
 2.Easy sorting and iteration
@@ -173,6 +177,7 @@ print("Sorted array:",arr)
 '''
 
 #Dis-advantages
+
 '''
 1. Size is fixed
 2.Difficult to insert and deleted

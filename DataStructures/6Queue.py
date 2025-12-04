@@ -89,6 +89,7 @@ class CircularQueue:
             return temp
 
     # Display queue
+    
     def display(self):
         if self.front == -1:
             print("Queue is Empty ❌")
@@ -97,7 +98,9 @@ class CircularQueue:
         else:
             print("Queue elements:", self.queue[self.front:] + self.queue[:self.rear + 1])
 
+            
 # Example usage
+
 cq = CircularQueue(5)
 cq.enqueue(10)
 cq.enqueue(20)

@@ -42,7 +42,9 @@ stack.append("Y")
 print(stack)
 
 '''
+
 #Implementation using queue
+
 '''
 from queue import LifoQueue
 stack = LifoQueue()

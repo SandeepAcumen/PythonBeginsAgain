@@ -29,7 +29,7 @@ print(rev)
 #2. Write the code to find the Fibonacci series upto the nth term.
 
 #3. Write code of Greatest Common Divisor
-
+'''
 num1 = int(input("Enter First Number:"))
 num2 =int(input("Enter second Number:"))
 
@@ -46,3 +46,15 @@ def gcdF(num1,num2):
     print("GCD of two number:{}".format(gcd))
 
 gcdF(num1,num2)
+
+'''
+
+
+
+
+
+
+
+
+
+

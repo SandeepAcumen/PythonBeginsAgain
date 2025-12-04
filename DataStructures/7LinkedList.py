@@ -26,6 +26,7 @@
 
 #Advantages
 '''
+
 1. Dynamic in size
 2. No wastage as capacity and size is always equal
 3. Easy insertion and deletion as 1 link manipulation is required
@@ -37,6 +38,7 @@
 '''
 1. if head node is lost ,linked list is lost
 2. no random access is possible
+
 '''
 
 

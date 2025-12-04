@@ -4,11 +4,31 @@
 #1. What is Python??
 #2. How is Python Interpreted?
 #3. What are Pythons key features??
+'''
+Easy to learn and use
+Interpreted language
+Dynamically typed
+Extensive libraries
+Object-oriented
+Portable
+'''
+
 #4. What is PEP 8?
+'''
+PEP 8 is the Python Enhancement Proposal that provides guidelines 
+and best practices for writing Python code.
+'''
 #5. How do you manage memory in Python?
+'''
+Python uses automatic memory management and a garbage collector to handle memory.
+The garbage collector recycles memory when objects are no longer in use.
+'''
 #6. What are Pythons data type?
 #7. What is the difference between Tuple and List?
-
+'''
+List: Mutable, can be changed after creation.
+Tuple: Immutable, cannot be changed after creation.
+'''
 #8.How do you handle exeptions in Python
 '''
 class Python:
@@ -365,6 +385,7 @@ print(first_non_repeating_character("swiss"))
 #38. What are Python's @staticmethod and @classmethod?
    #@staticmethod: Defines a method that does not operate 
    # on an instance or class; no access to self or cls.
+   
    #@classmethod: Defines a method that operates on the 
    # class itself; it receives the class as an implicit 
    # first argument (cls).
