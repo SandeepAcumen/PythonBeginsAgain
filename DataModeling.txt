@@ -1,0 +1,77 @@
+https://www.youtube.com/watch?v=K7C1sWKQU-o&t=502s
+
+
+1.What is data modeling?
+   Data modeling is the process of creating a blueprint of how data 
+is stored,coonect and retrived in a system
+As a Data Engineer,its not just about pipwlines and tools -you need to
+design data strcture that supports reporting, scalability and performance.
+
+
+2.Why it Matters??
+   Makes data easier to understand and use Improves query performance,
+Helps build scalable systems
+
+
+3.Types of Data Models?
+  a.Conceptual  (hight level overview)
+  -- Hight level view
+  -- Entites and thier relatioships
+
+  b.Logical
+  -- Includes attributes,relationships
+  -- No concern for data types or DBMS
+
+  c.Physical
+  -- Real implementayion
+  -- Data types, constraints, index, partition
+
+4.OLTP vs OLAP Models?
+
+OLTP --Oline transactional processing
+     --Transactions easily
+     --used for writiing the data in DBMS
+     --Normalization
+
+
+OLAP --Oline Analytical processing
+     --Dimensional Data Models
+     --Used to read for Analytical process
+
+
+5.What is ETL pipwlines?
+
+6.What is ETL Layers??
+
+    Source -> Stage -> Trasform -> Serve(here we build the model)
+
+7.Where Data Modeling Fits??
+   Data modeling fits in Curated Layer from below
+   Raw --> Enriched --> Curated
+
+8.Medallion Architecture?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

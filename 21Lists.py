@@ -8,6 +8,13 @@ print("the index value is",marks[1])
 print(mixed[1:3]) # to print the range
 
 
+# append and insert
 
 
+l = [1,2,3,4,5]
+l.append(6)
+print(l)
 
+m=[6,7,8,10]
+m.insert(3,9)
+print(m)

@@ -5,3 +5,4 @@ def sum(*args):
     return total
 
 print(sum(123,256,25,6))
+
