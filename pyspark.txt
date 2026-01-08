@@ -150,9 +150,37 @@ final_table.show()
 2.Sorting data
 3.Aggregations
 
+1.show emp dataframe (Action)
+
+emp_data_1.show()
+emp_data_2.show()
+
+2.union and union all
+
+emp = emp_data_1.union(emp_data_2) 
+emp.show()
+
+emp2 = emp_data_1.unionAll(emp_data_2)
+emp2.show()
+
+3.Sort the emp data based on desc order for salary
+
+emp_sal = emp1.orderBy(col("salary").desc())
+emp_sal.show()
+
+4.Aggregation
+
+emp_count =  emp_soreted.groundBy("department").agg(count("employee_id).alias("Total_dept_count"))
+emp_count.show()
+
+emp_sum = emp_sorted.grounpBy("department").agg(sum("salary").alias("Total_Salary"))
+emp_sum.show()
 
 
+emp_avg = emp_soreted.frounpBy("dept_id).agg(avg("salary")).where("avg_dept_salary > 5000")
 
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
 
 
 
