@@ -2,12 +2,196 @@ https://www.youtube.com/watch?v=N-MbyH7EhoQ
 
 intelliPaat
 
-1.
+1.What is Data Engineering?
+-Designign
+-storing 
+-mainaging
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+2.What is Normalisation??
 
+-Normalization is the process of structuring a database to minimize 
+duplicate data and maintain consistency by dividing data into well-defined 
+tables.
 
+1NF (First Normal Form)
+ -each column must have atomic (indivisible) values
+ -No repeating groups or multi-valued columns
+ -Skills = Python, SQL
+✅ Skills = Python | Skills = SQL
 
+2NF (Second Normal Form)
 
+-Table must be in 1NF
+-No partial dependency (non-key column should depend on the whole 
+primary key)
 
+3NF (Third Normal Form)
+
+-Table must be in 2NF
+-No transitive dependency (non-key column should not depend on another
+ non-key column)
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+3.Define Data Modeling?
+Data modeling is the process of designing how data is structured, stored, and 
+related in a database or data warehouse to support business requirements, data integrity, 
+and efficient querying.
+
+1.Conceptual Data Model
+-High-level business view
+-Shows entities and relationships
+-No technical details
+-Example: Customer → Order → Product
+
+2.Logical Data Model
+-Detailed structure
+-Attributes, primary keys, relationships
+-Still database-independent
+-Example: CustomerID, OrderID, ProductID
+
+3.Physical Data Model
+-Actual database implementation
+-Tables, columns, data types, indexes
+-Example: customer_id INT PRIMARY KEY
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+4.Difference between Structure and Unstructure data?
+
+1.Structured Data
+-Data organized in rows and columns
+-Fixed schema
+-Easy to query using SQL
+-Examples:
+        -Tables in relational databases
+        -Excel sheets
+        -Transaction records
+
+2.Unstructured Data
+-Data with no fixed format or schema
+-Difficult to query directly
+-Requires processing before analysis
+-Examples:
+         -Text documents
+         -Images, videos
+         -Emails, social media posts
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+5.What are ETL and ELT pipelines?
+
+1.ETL stands for Extract → Transform → Load.
+-Data is extracted from source systems
+-Transformed before loading (cleaning, joining, aggregating)
+-Final data is loaded into the target (data warehouse)
+-Used when:
+    -Target system has limited compute
+    -Traditional data warehouses
+
+2.ELT stands for Extract → Load → Transform.
+-Data is extracted from sources
+-Loaded as-is into the warehouse or data lake
+-Transformations happen inside the target system
+-Used when:
+   -Cloud data warehouses with high compute
+   -Large-scale data processing
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+6.Explain Difference between Relational databases and NoSQL databases?
+
+Relational Databases (RDBMS)
+-Data stored in tables (rows & columns)
+-Fixed schema
+-Uses SQL
+-Strong ACID compliance
+-Best for structured data & transactions
+-Examples: MySQL, PostgreSQL
+
+NoSQL Databases
+-Data stored as documents, key-value, column, or graph
+-Flexible or schema-less
+-Horizontally scalable
+-Optimized for large-scale & unstructured data
+-Follows BASE consistency (eventual consistency)
+-Examples: MongoDB, Cassandra
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+7.What is the purpose of indexing in database, and how does it improve
+performance??
+
+Indexing is used to speed up data retrieval by creating a separate lookup structure 
+that allows the database to find rows quickly without scanning the entire table.
+
+How Indexing Improves Performance:
+-Indexes store sorted values with pointers to table rows
+-Database uses indexes to perform quick searches (similar to a book index)
+-Reduces disk I/O and query execution time
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+8.what are the comman challenges in data engineering and how do you address them??
+
+1.Data Quality Issues
+Challenge: Missing, duplicate, or incorrect data.
+Solution:
+-Validation checks (null checks, schema validation)
+-Deduplication logic
+-Data quality monitoring
+
+2.Handling Large Data Volumes
+Challenge: Slow processing with big datasets.
+Solution:
+-Distributed processing using Apache Spark
+-Partitioning and parallelism
+-Efficient file formats (Parquet)
+
+3.Schema Changes (Schema Drift)
+Challenge: Source schema changes break pipelines.
+Solution:
+-Schema versioning
+-Backward-compatible transformations
+-Alerts for schema mismatch
+
+4.Pipeline Failures
+Challenge: Job failures due to data or infrastructure issues.
+Solution:
+-Retries and failure handling using Apache Airflow
+-Idempotent pipelines
+-Logging and alerting
+
+5.Real-Time Data Processing
+Challenge: Processing streaming data reliably.
+Solution:
+-Message queues like Apache Kafka
+-Exactly-once or at-least-once processing
+-Monitoring lag and throughput
+
+6.Data Security & Compliance
+Challenge: Protecting sensitive data.
+Solution:
+-Encryption (at rest & in transit)
+-Role-based access control
+-Data masking for PII
+
+7.Cost Management (Cloud)
+Challenge: High cloud costs.
+Solution:
+-Optimizing storage formats
+-Auto-scaling
+-Monitoring usage and setting budgets
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
 
 
 

@@ -157,7 +157,7 @@ emp_data_2.show()
 
 2.union and union all
 
-emp = emp_data_1.union(emp_data_2) 
+emp = emp_data_1.union(emp_data_2)
 emp.show()
 
 emp2 = emp_data_1.unionAll(emp_data_2)
@@ -182,8 +182,51 @@ emp_avg = emp_soreted.frounpBy("dept_id).agg(avg("salary")).where("avg_dept_sala
 -----------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------
 
+10 Window Functions, Unique Data & Databricks Community Cloud
+
+1.Unique/Distinct data
+2.Window Functions
+3.Databricks Community Cloud
+
+1.Get unique data
+select distinct emo.* from emp
+
+emp_unique = emp.distinct()
+emp.unique()
+
+2.select distinct dept_id from emp
+
+emp_dist = emp.select("dept_id").distinct()
+emp_dist.show()
 
 
+3.Window Functions
+select *, max(salary) over(partition by dept_id order by salary desc) as max_salary from emp_unique
+
+from pyspark.sql.window import window
+from pyspark.sql.functions import max,col,desc
+window_spec = Window,partitionBy(col("dept_id")).orderBy(col("Salary")).desc()
+max_func = max(col("salary")).over(window_spec)
+emp_1 = emp.withCloumn("max_salary",max_func)
+emp_1.show()
+
+4.Window function    2nf higest salary of each department
+
+from pyspark.sql.window import window
+from pyspark.sql.functions import max,col,desc,col
+window_spec = Window.partitionBy(col("dept_id")).orderBy(col("Salary")).desc()
+rn = row_number().over(window_spec)
+emp_2 = emp.withCloumn("rn",rn).where("rn =2")
+emp_2.show()
+
+5. Window function using expr
+
+emp_3 = emp.withCloumn("rn",expr("row_number() over(partion by department_id order by salary desc)"))
+emp_3.show()
+
+
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
 
 
 
