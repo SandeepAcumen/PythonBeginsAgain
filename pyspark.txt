@@ -1,0 +1,263 @@
+
+------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Basic Structured Transformation - Part 2 
+
+1.Adding Columns
+2.Using Literals/Static values
+3.Renaming Columns
+4.Removing Columns
+5.Filtering and LIMIT for Dataframe
+6.Structure transformation- with columns,withCloumnsRenamed,lit
+
+
+
+1. 
+from pyspark.sql.functions import col,cast
+emp_casted = emp.select("employee_id","name",col("salary").cast("double"))
+emp_casted.printSchema()
+
+2.Adding col,,
+select emp_id,name,age,salary,tax,1 as columnOne,'two' as columnTwo from emp_taxed
+
+emp_taxed = emp_casted.withCloumn("tax,col("salary")*0.2)
+emp_taxed.show()
+
+3.Literals
+select emp_id,name,age,salary,tax,1 as columnOne,'two' as columnTwo from emp_taxed
+
+emp_new_col = emp_casted.withCloumn("CloumnOne",lit(1)).withCloumn("columnTwo",lit('two'))
+emp_new_col.show()
+
+4.Renaming the column
+select employee_id as emp_id , name ,age,salary, columnOne,columnTwo from emp_new_col
+
+emp_1 = emp_new_col.withCloumnRenamed("employee_id","emp_id")
+emp_1.show()
+
+5.Cloumn name with spaces
+select employee_id as emp_id , name ,age,salary, columnOne,columnTwo as Column Two from emp_new_col
+
+emp_2 = emp_new_col.withCloumnRenamed("columnTwo","Column Two")
+emp_2.show()
+
+6.Remove Cloumn
+
+emp_deopped = emp_new_col.drop("column Two")
+emp_dropped.show()
+
+7.To Remove multiple columns
+
+emp_deopped = emp_new_col.drop("columnOne","columnTwo")
+emp_deopped,show()
+
+8.Filter Dataframe
+select emp_id,name, age,salary,tax,columnOne from emp_col_dropped where tax> 1000
+
+emp_col_dropped.select("emp_name","name","salary").where("tax" > 1000)
+
+
+9.limit data
+select emp_id,name, age,salary,tax,columnOne limit 5
+
+emp_limit = emp_filterd.limit(5)
+emp_limit.show()
+
+or
+
+emp_limit.show(2)
+
+
+--------Bonus-------
+Add multiple columns
+
+cloumns = {
+    'tax':col("salary") * 0.2,
+    'oneNumber' : lit(1),
+    'columnTwo' : lit("TWO")
+}
+emp_final = emo.withCloumns(cloumns)
+emp_final.show()
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+08 Working with Strings, Dates and Null
+
+1.Working with STring Data - Case when,Regex_Replace emp_casted
+2.Working with Dates- to_date,cuurent_date,current_timestamp
+3.Working with Null values - nvl,na.drop,na.fill
+
+
+
+1.select emp_id,name,sal,age,gender
+case when gender - 'Male' then "M" 'Female' then F else null end as new_gender,hire_date from emp
+
+from pyspark.sql.functions import when, col,empr
+emp_gender_fixed = emp.withColumn("new_gender",when(col("gender")=="Male","M")
+                                              .when(col("gender")=="Female","F")
+                                              .otherwise(None))
+emp_gender_fixed.show()
+
+
+
+2.select emp_id,name, replace(name,'J','7') as new_name,age,salary,gender,new_gender,hire_date from emp_gender_fixed
+
+emp_name_fixed = emp_gender_fixed.withColumn("new_name",reg_expreplace("name"),"J","7")
+emp_name_fixed.show()
+
+
+3.select *, to_date(hire_date, 'YYYY-MM-DD') as hire_date from emp_name_fixed
+
+from pyspark.sql.functions import to_date
+emp_date_fixed = emp_name_fixed.withCloumn("hire_date",to_date(col("hire_date"),'YYYY-MM-DD'))
+emp_date_fixed.show()
+
+
+4.Add Date column
+Add current_date ,current_timestamp, extract year from hire_date
+
+emp_dated = emp_date_fixed.withCloumn("date_now",current_date()).withCloumn("timestamp_now",current_timestamp())
+emp_dated.show()
+emp_dated.show(truncate = False)
+
+
+5.Drop null gender records
+
+emp_l = emp_dated.na.drop()
+emp_l.show()
+
+
+6.fix Null values
+select *,null('new_gender','o') as new_gender from emp_dated
+
+from pyspark.sql.functions import coalesce
+emp_null_of = emp_dated.withCloumn("new_gender",coalesce(col("new_gender"),lit("o")))
+emp_null_of.show()
+
+
+7.drop old columns and fix new columns names
+
+final_table = emp_null_of.drop("name","gender").withCloumnRename("new_name","name").withCloumnRename("new_gender","gender")
+final_table.show()
+
+-----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+
+09 Sorting data, Union and Aggregation in Spark | Difference in Union and UnionAll
+
+1.Union of Dataframe
+2.Sorting data
+3.Aggregations
+
+1.show emp dataframe (Action)
+
+emp_data_1.show()
+emp_data_2.show()
+
+2.union and union all
+
+emp = emp_data_1.union(emp_data_2)
+emp.show()
+
+emp2 = emp_data_1.unionAll(emp_data_2)
+emp2.show()
+
+3.Sort the emp data based on desc order for salary
+
+emp_sal = emp1.orderBy(col("salary").desc())
+emp_sal.show()
+
+4.Aggregation
+
+emp_count =  emp_soreted.groundBy("department").agg(count("employee_id).alias("Total_dept_count"))
+emp_count.show()
+
+emp_sum = emp_sorted.grounpBy("department").agg(sum("salary").alias("Total_Salary"))
+emp_sum.show()
+
+
+emp_avg = emp_soreted.frounpBy("dept_id).agg(avg("salary")).where("avg_dept_salary > 5000")
+
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+
+10 Window Functions, Unique Data & Databricks Community Cloud
+
+1.Unique/Distinct data
+2.Window Functions
+3.Databricks Community Cloud
+
+1.Get unique data
+select distinct emo.* from emp
+
+emp_unique = emp.distinct()
+emp.unique()
+
+2.select distinct dept_id from emp
+
+emp_dist = emp.select("dept_id").distinct()
+emp_dist.show()
+
+
+3.Window Functions
+select *, max(salary) over(partition by dept_id order by salary desc) as max_salary from emp_unique
+
+from pyspark.sql.window import window
+from pyspark.sql.functions import max,col,desc
+window_spec = Window,partitionBy(col("dept_id")).orderBy(col("Salary")).desc()
+max_func = max(col("salary")).over(window_spec)
+emp_1 = emp.withCloumn("max_salary",max_func)
+emp_1.show()
+
+4.Window function    2nf higest salary of each department
+
+from pyspark.sql.window import window
+from pyspark.sql.functions import max,col,desc,col
+window_spec = Window.partitionBy(col("dept_id")).orderBy(col("Salary")).desc()
+rn = row_number().over(window_spec)
+emp_2 = emp.withCloumn("rn",rn).where("rn =2")
+emp_2.show()
+
+5. Window function using expr
+
+emp_3 = emp.withCloumn("rn",expr("row_number() over(partion by department_id order by salary desc)"))
+emp_3.show()
+
+
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
