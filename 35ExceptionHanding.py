@@ -15,6 +15,8 @@ while True:
         b  = int(input("Enter the number 2 :"))
 
         print((f"the sum is { a / b}"))
+
+        
     except ValueError:
         print("Please dont perform bad typecases")
 
@@ -25,7 +27,7 @@ while True:
         print("Unknown error occurred!!" , e)
 
 '''
- 
+
 '''
 a = int(input("Enter the number 1 :"))
 b  = int(input("Enter the number 2 :"))
@@ -34,8 +36,10 @@ if b==0:
     raise ValueError("Please dont divide by 0")
 
 print((f"the sum is { a / b}"))
+
 '''
 
+'''
 a = int(input("Enter the number 1 :"))
 b  = int(input("Enter the number 2 :"))
 
@@ -48,5 +52,7 @@ except Exception as e:
 
 finally:
     print("This is always executed")
+
+'''
 
 

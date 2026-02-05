@@ -8,13 +8,14 @@ As a Data Engineer,its not just about pipwlines and tools -you need to
 design data strcture that supports reporting, scalability and performance.
 
 
-2.Why it Matters??
+2.Why it Matters?? (Data Modeling)
    Makes data easier to understand and use Improves query performance,
 Helps build scalable systems
 
 
 3.Types of Data Models?
-  a.Conceptual  (hight level overview)
+  a.Conceptu
+   al  (hight level overview)
   -- Hight level view
   -- Entites and thier relatioships
 
@@ -39,7 +40,8 @@ OLAP --Oline Analytical processing
      --Used to read for Analytical process
 
 
-5.What is ETL pipwlines?
+5.What is ETL pipelines?
+
 
 6.What is ETL Layers??
 
@@ -49,7 +51,28 @@ OLAP --Oline Analytical processing
    Data modeling fits in Curated Layer from below
    Raw --> Enriched --> Curated
 
-8.Medallion Architecture?
+8.Medallion Architecture?(It is the renaming of the above Raw,Enriched,Curated)
+  Bronze --> Silver -->Gold
+  
+
+----------------------- Databricks Free Env --------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

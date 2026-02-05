@@ -175,7 +175,7 @@ while number > 0:
     print(result, end=" ")
 
 print() 
-5
+
 if reverse == original:
     print("It is a palindrome")
 else:
