@@ -1,0 +1,177 @@
+1.select * 
+from Orders
+where salesman_id  = (select sales_id, name 
+                    from salesman
+                     where name = "Paul Adam");
+
+
+2.select * 
+  from Orders
+  where salesman_id IN (select city,salesman_id
+  			from salesman
+  			where city = "Londan");
+
+3. select * 
+   from Orders
+   where salesman_id = (select distinct(salesman_id)
+   			from Orders
+   			where customer_id =3007) ;
+
+4.selct * 
+from Orders
+where salesman_id =  (select avg(purch_amt)
+   		      from Orders
+   		      where ord_date = "2012-10-10");
+
+5.select *
+  from Orders
+  where salesman_id IN(select salesman_id
+  			from Orders 
+  			where city = "New York");
+
+7.select * 
+from salesman 
+where salesman_id = (select salesman_id
+                     from Customers
+                     where customers_id < = 2001
+		     name = 'Mc Lyon');
+
+8.select grade, count(customers)
+ from customers 
+ group by grade
+ having grade >  = (select avg(grade)
+                    from customers
+                     where ciy = 'New York');
+
+9.select *
+  from orders
+  where salesman_id IN (selct salesman 
+  		        from orders
+                        where commison = (select max(commission)
+ 		                          from salesman 
+  		                          ));
+
+10.
+
+seelct *
+from orders
+where salesman_id = (select customer_id
+		     from Orders 
+                     where salesman_in in (select Customers_id
+   		                            from Orders
+                                             where ord_date = '2012-10-17'))
+
+11.select salesman_id,name
+   from salesman a
+   where 1 < (select count(*)
+ 	      from customer
+              where salesman_id = a.salesman_id);
+
+
+12.select *
+   from Orders
+where purch_amt > (select salesman_id, avg(purch_amt)
+                   from orders);
+    
+13.select *
+   from Orders a
+   where purch_amt > = ( Select Salesman_id, avg(purch_amt)
+			from orders
+			where a.customers_id = customers_id);
+
+14.select order_date, SUM(purch_amt)
+   from orders a 
+   group by ord_date
+   having sum(purch_amt) > (select 1000.00 + MAX(purch_amt) 
+			    from orders b
+			    where a.ord_date = b.ord_date);
+
+15.select customers_id,cust_name, city 
+   from customers
+   where exists (select * 
+   		 from customer
+  		 where city = 'London');
+
+16.select salesman_id ,name ,citycommision
+   from salesman
+   where salesman_id in(
+                 select salesman_id,customer_id
+                 from customer 
+                 group by sales_id
+                 having count(sales_id) >1);
+   
+17.select salesman_id ,name ,citycommision
+   from salesman
+   where salesman_id in(
+                 select salesman_id,customer_id
+                 from customer 
+                 group by sales_id
+                 having count(sales_id) =1
+                 );	
+
+18.SELECT 
+    s.salesman_id,
+    s.name,
+    s.city,
+    s.commission
+FROM salesman s
+WHERE s.salesman_id IN (
+    SELECT c.salesman_id
+    FROM customers c
+    JOIN orders o
+        ON c.customer_id = o.customer_id
+    GROUP BY c.salesman_id, c.customer_id
+    HAVING COUNT(o.order_id) > 1
+);
+
+
+19. 
+
+select * 
+from salesman
+where city in (
+                select distint(city)
+                from customers
+)
+
+
+20.select * 
+   from salesman 
+   where city in(
+        select city
+        from cutomers
+   )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
