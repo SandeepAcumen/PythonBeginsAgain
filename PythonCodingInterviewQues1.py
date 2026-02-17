@@ -280,6 +280,18 @@ count = re.sub('[\w]+', '', spChar)
 print(len(count))
 '''
 
+'''
+
+spChar = "!@#$%^&*23 gfh 5()"
+
+count = 0
+
+for ch in spChar:
+    if not ch.isalnum() and not ch.isspace():
+        count += 1
+
+print(count)
+'''
 #26. Removing All Whitespace in a String ***********
 '''
 import re

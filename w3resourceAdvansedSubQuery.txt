@@ -142,6 +142,58 @@ where city in (
         from cutomers
    )
 
+21.select * 
+   from salesman avg
+   where exists(
+      select * 
+      from customer by
+      where a.name < b.cust_name
+   );
+
+22.select *
+   from customer
+   where grade > ANY(
+      select grade
+      from customer
+      where city < 'New York'
+   );
+
+23.select *
+   from Orders
+   where purch_amt > any(
+      select purch_amt
+      from orderswhere ord_date = '2012/09/10'
+   );
+
+24.select *
+   from Orders
+   where puch_amy < ANY(
+      seelct *
+      from customers
+      where city = "Londan"
+   )
+
+25.select *
+   from Orders
+   where purch_amt <Any(
+      select max(purch_amt)
+      from customers
+      where city = 'London'
+   )
+
+26.SELECT 
+    s.name AS salesman_name,
+    s.city,
+    SUM(o.amount) AS total_order_amount
+FROM salesman s
+JOIN orders o
+    ON s.salesman_id = o.salesman_id
+JOIN customer c
+    ON o.customer_id = c.customer_id
+WHERE s.city = c.city
+GROUP BY s.name, s.city;
+
+
 
 
 
