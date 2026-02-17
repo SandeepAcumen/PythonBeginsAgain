@@ -1,0 +1,81 @@
+--------------------------------------------
+weatherReport
+--------------------------------------------
+
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("/s/s.csv")
+
+df.info()
+
+df.head(5)
+
+df.tail(5)
+
+df.duplicated()
+
+df.drop_duplicated(ignore_index = True)
+
+df.head(10)
+
+df = df.rename(columns = {"Unnamed: 0":"Serial Number"})
+
+df = df.rename(columns = {"Month":"Monthly"})
+
+df['Temp C'] = df['Temp C'].replace("C","Null")
+
+
+df['Temp C'].fillna(77)
+
+df
+
+df = df.drop(columns= ['temp'], axis =1)
+
+ozonemean = df['ozone'].mean()
+
+df ['Ozone'] = df['ozone'].fillna('ozonemean')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
