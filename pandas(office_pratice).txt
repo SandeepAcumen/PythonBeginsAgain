@@ -37,6 +37,94 @@ ozonemean = df['ozone'].mean()
 df ['Ozone'] = df['ozone'].fillna('ozonemean')
 
 
+------------------------------------------------
+Netflix
+------------------------------------------------
+
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("/content/netflix_titles.csv")
+pd.set_option('display.max_rows',None)
+
+df.duplicated()
+
+df.drop_duplicated(ignore_index=True)
+
+df.head(101)
+
+df['title'] = df['title'].value_counts()
+
+df[df.show_id == 's5023']
+
+df.show_id.str.len()
+
+pd.set_option('display.max_rows', None)
+
+df
+
+df.show_id.str.title()
+
+
+----------------------------------------------------
+TitanicDataCleaning
+----------------------------------------------------
+
+import pandas as pd
+import numpy as np
+
+df.read_csv("/content/Titanic-Dataset.csv")
+
+df[df.duplicated()]
+
+df.info()
+
+df.head(5)
+
+
+df.loc[:,'PclCabinass'] = df['cabin'].replace('','Null')
+
+df.head(5)
+
+df['sex'] = df['sex'].str.title()
+df.head(6)
+
+agemean = df['Age'].mean().round()
+df['Age'] = df['Age'].fillna(agemean)
+
+df.loc[:'newAge'] = df['Age'].replace('',"Null")
+
+df['Age'].isnull().sum()
+
+df['Fare'] = df['Fare'].round(2)
+df['Fare'].head(10)
+
+print(len(df.columns))
+
+print(df.dtypes)
+
+print(pd.__version__)
+
+pandas means panel Dataset
+
+There are two data structures in pandas:
+   1.series - one dimensional (can be worked foe single column)
+   2.dataframe  -multidimensional( can be worked with multiple columns)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
