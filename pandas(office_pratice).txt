@@ -111,6 +111,8 @@ There are two data structures in pandas:
    1.series - one dimensional (can be worked foe single column)
    2.dataframe  -multidimensional( can be worked with multiple columns)
 
+
+
    
 
 
