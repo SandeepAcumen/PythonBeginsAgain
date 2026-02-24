@@ -284,16 +284,137 @@ Azure Synapse / Power BI
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 
+DATA WARE HOUSE
 
+31. What is a Fact Table?
 
+A fact table stores transactional or measurable business data like sales amount or quantity.
+ It contains foreign keys referencing dimension tables and is usually very large. It is 
+ mainly used for aggregations and reporting.
 
+Key Characteristics:
+        1.Very large table
+        2.Grows continuously
+        3.Mostly numeric columns
+        4.Used in aggregations (SUM, COUNT, AVG)
 
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
 
+32. What is a Dimension Table?
 
+A dimension table contains descriptive attributes like customer name, city, product 
+category etc. It provides context to fact data and is used for filtering and grouping 
+in reports.
 
+Characteristics:
+        1.Smaller than fact tables
+        2.Contains descriptive text columns
+        3.Used for filtering and grouping
 
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
 
+33. What is Star Schema?
 
+Star schema is a data warehouse design where a central fact table connects directly
+to multiple dimension tables. It improves query performance and simplifies reporting.
+
+Why Used?
+    1.Simple design
+    2.Faster queries
+    3.Easy to understand
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+34. What is Snowflake Schema?
+
+Snowflake schema is an extension of star schema where dimension tables are normalized 
+into multiple related tables to reduce redundancy.
+
+Dimension tables are split into sub-dimensions.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+35. What is SCD Type 1?
+
+Slowly Changing Dimension Type 1
+SCD Type 1 overwrites existing data without maintaining history. It is simple but 
+historical changes are lost.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+36. What is SCD Type 2?
+
+SCD Type 2 preserves historical data by inserting a new record when changes occur 
+and expiring the previous record using start and end dates.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+37. What is a Surrogate Key?
+
+A surrogate key is a system-generated unique identifier used in dimension tables 
+instead of business keys to maintain consistency and improve performance.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+38. Why Do We Partition Large Tables?
+
+Partitioning splits large tables into smaller segments based on a column like date. 
+It improves query performance and reduces scan time.
+
+Purpose:
+    1.Improve query performance
+    2.Manage large datasets
+    3.Faster loading
+    4.Easier maintenance
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+39. What is Data Skew?
+
+Data skew occurs when data is unevenly distributed across partitions, causing 
+performance bottlenecks in distributed systems.
+
+Solution:
+    Repartition
+    Use salting
+    Choose better partition key
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+40. What is ETL vs ELT?
+
+41. Why is Parquet Better than CSV?
+
+Parquet is columnar, compressed, and schema-aware, making it more efficient for 
+analytics compared to CSV.
+
+CSV:
+    Row-based
+    Larger size
+    No schema
+
+Parquet:
+    Columnar format
+    Compressed
+    Faster queries
+    Stores schema
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+42. What is Columnar Storage?
+
+Columnar storage stores data by columns instead of rows, improving compression and 
+query performance for analytical workloads.
 
 
 
