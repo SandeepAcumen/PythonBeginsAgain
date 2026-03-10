@@ -360,12 +360,12 @@ and expiring the previous record using start and end dates.
 A surrogate key is a system-generated unique identifier used in dimension tables 
 instead of business keys to maintain consistency and improve performance.
 
-----------------------------------------------------------------------------------
-----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 38. Why Do We Partition Large Tables?
 
-Partitioning splits large tables into smaller segments based on a column like date. 
+Partitioning splits large tables into smaller segments based on a column like date.
 It improves query performance and reduces scan time.
 
 Purpose:
@@ -374,8 +374,8 @@ Purpose:
     3.Faster loading
     4.Easier maintenance
 
-----------------------------------------------------------------------------------
-----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 39. What is Data Skew?
 
@@ -415,6 +415,10 @@ Parquet:
 
 Columnar storage stores data by columns instead of rows, improving compression and 
 query performance for analytical workloads.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
 
 
 

@@ -1,0 +1,236 @@
+Q1. Tell me about yourself.
+    1.I have around 2 years of experience as a Data Engineer, mainly working with Azure 
+    Data Factory, Azure SQL Database, ADLS Gen2, and SQL.
+
+    2.My primary responsibilities include building ETL pipelines, 
+    performing data transformations, implementing incremental loads, and optimizing SQL queries.
+    
+    3.I have worked on ingesting data from relational databases into Azure Data Lake 
+    using ADF pipelines, transforming the data, and loading it into curated tables for reporting.
+    
+    4.I also have experience with Python for data processing and automation, and 
+    I’m currently improving my skills in GCP BigQuery and Spark-based processing.
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q2. Explain your recent project architecture.
+
+    1.In my recent project, the architecture included Azure SQL Database as the source system.
+
+    2.We used Azure Data Factory for orchestration and ingestion, where data was extracted and 
+    loaded into Azure Data Lake Storage Gen2 in the raw layer.
+
+    3.From there, transformations were performed and data was moved to processed and curated layers.
+
+    4.Finally, the data was consumed by reporting tools like Power BI for analytics.
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q3. What is the difference between ETL and ELT?
+
+Q4. What is Azure Data Factory?
+
+Azure Data Factory is a cloud-based data integration service used to create, 
+schedule, and orchestrate ETL/ELT pipelines.
+Key Components:
+    PipelinesActivities
+    Linked Services
+    Datasets
+    Integration Runtime
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q5. What is Integration Runtime?
+
+Integration Runtime is the compute infrastructure used by ADF to perform data movement and transformation.
+
+| Type           | Purpose                  |
+| -------------- | ------------------------ |
+| Azure IR       | Cloud data movement      |
+| Self-hosted IR | On-premises connectivity |
+| SSIS IR        | Run SSIS packages        |
+
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q6. How did you implement incremental load?
+
+    1.We used a watermark column like LastModifiedDate in the source table.
+    2.During each pipeline run, we retrieved the last processed timestamp from a metadata table, 
+    and only records with a greater timestamp were extracted.
+
+    SELECT *
+    FROM Orders
+    WHERE LastModifiedDate > @LastRunTime
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q7. What if the source table doesn’t have a timestamp column?
+
+    If no timestamp column exists, I use hash comparison or enable CDC to detect changes.
+   Possible solutions:
+    1.Change Data Capture (CDC)
+    2.Hash comparison
+    3.Full load with merge logic
+    4.Database triggers
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q8. Difference between Azure Blob Storage and ADLS Gen2?
+
+    ADLS Gen2 provides hierarchical namespace and optimized performance for big data analytics workloads 
+    compared to Blob storage.
+
+    | Blob Storage        | ADLS Gen2               |
+| ------------------- | ----------------------- |
+| Object storage      | Data lake storage       |
+| No folder hierarchy | Hierarchical namespace  |
+| Limited analytics   | Optimized for analytics |
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q9. What is partitioning?
+ 
+    Partitioning divides large tables into smaller segments based on a column.
+
+    Example:
+        Date
+        Region
+        Year
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q10. How do you optimize slow pipelines?
+
+    I analyze pipeline logs, check data volume, enable parallel copy, and optimize queries to 
+    reduce processing time.
+
+    Steps:
+        Parallel copy
+        Partitioned reads
+        Use columnar formats
+        Reduce transformations in pipeline
+        Optimize source queries
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q11. Difference between Clustered and Non-Clustered Index?
+
+    | Clustered                     | Non-clustered            |
+| ----------------------------- | ------------------------ |
+| Data stored physically sorted | Separate index structure |
+| Only one per table            | Multiple allowed         |
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q12. What is a CTE?
+
+Q13. What is a window function?
+
+    Functions applied across rows related to current row.
+    Examples:
+        ROW_NUMBER()
+        RANK()
+        LEAD()
+        LAG()
+
+Q14. What is data skew?
+
+Q15. What is a Data Lake?
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q16. What is Parquet?
+
+    Columnar storage format optimized for analytics.
+    Benefits:
+        Compression
+        Faster queries
+        Schema support
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q17. How do you handle pipeline failures?
+
+I configure retry policies and monitor failures through Azure Monitor alerts to ensure pipeline reliability.
+    Methods:
+        Retry policy
+        Logging
+        Alerts
+        Idempotent design
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q18. What is orchestration?
+
+        Coordinating multiple tasks in a workflow.
+    Example:
+        Extract data
+        Transform data
+        Load data
+        Trigger reporting
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q21. Why should we hire you?
+
+    1.I have hands-on experience building ETL pipelines using Azure Data Factory, 
+    writing optimized SQL queries, and implementing incremental loading strategies.
+
+    2.I also continuously improve my skills in cloud data platforms like Azure and 
+    GCP, which allows me to contribute effectively to scalable data engineering solutions.
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
