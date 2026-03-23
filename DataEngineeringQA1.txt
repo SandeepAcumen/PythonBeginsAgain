@@ -1,0 +1,440 @@
+Q1: Difference between INNER JOIN and LEFT JOIN?
+Answer:
+INNER JOIN → Returns matching records from both tables
+LEFT JOIN → Returns all records from left table + matching from 
+right (NULL if no match)
+--------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+Q2: How do you remove duplicates?
+
+select Distinct(column_name)
+from empl;oyee
+
+or
+
+select cte as(
+    select *,Row_Number() over ( partition by col1 order by col1 ) Row_Number
+    from table
+)
+delete from cte 
+where rn > 1;
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+Q3: What is indexing? Types?
+
+Indexing is a database optimization technique used to speed up data retrieval from a table.
+1.Clustered Index:
+A Clustered Index determines the physical order of data in a table.
+  a. Data rows are stored in sorted order based on the clustered key.
+  b. Only ONE clustered index per table (because data can be sorted only one way).
+  SQL: create clustered_index idx_empid
+       on Employees(Employee_id)
+
+2.Non-Clustered Index:
+A Non-Clustered Index creates a separate structure that stores:
+  a.Indexed column value
+  b.Pointer to actual data row
+  c.You can have multiple non-clustered indexes per table
+  SQL: create nonclustered index inx_name
+       on Employee(emp_id);
+
+3.Composite Index:
+An index created on Multiple columns
+   SQL:Create index idx_city
+   on Customers(name,city);
+
+4.covering Index:
+An index that contains all the columns required by a query, so the database 
+doesn’t need to access the actual table.
+   SQL: Create index idx_cover
+        on orders(customer_id)
+        include (orderDate,Amount);
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q4: What is normalization?
+
+1NF, 2NF, 3NF
+Removes redundancy
+Improves consistency
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q5: Difference between WHERE and HAVING?
+
+WHERE → filters before aggregation
+HAVING → filters after GROUP BY
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+🔹 2️⃣ Azure Data Factory (Most Asked)
+
+Q6: What is Linked Service?
+
+A Linked Service in Azure Data Factory is a connection string that defines how 
+ADF connects to external resources such as:
+a.Data stores
+b.Compute services
+c.External systems
+
+A bridge between Azure Data Factory and your data source.
+Linked Service → Dataset → Pipeline → Activity
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q7: Difference between Dataset and Linked Service?
+
+Linked Service defines the connection information to external data sources, 
+whereas Dataset defines the structure and location of the data within that source.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q8: How do you implement Incremental Load? (More detail search in chatgpt)
+
+Using watermark pattern. Store last load timestamp in control table, use Lookup to 
+fetch it, filter source data using ModifiedDate > LastLoadDate, update watermark after load.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q9: How to load multiple tables dynamically?
+
+Use Lookup + ForEach + parameterized datasets.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q10: What is Integration Runtime?
+
+Integration Runtime (IR) is the compute infrastructure used by ADF to move and transform data.
+It is the engine that actually executes activities in a pipeline.
+
+a.Azure Integration Runtime
+        Used For:
+            Cloud-to-cloud data movement
+            Running Mapping Data Flows
+
+        Features:
+            Fully managed by Azure
+            No setup required
+            Auto scaling
+        Example:
+            Copy from Azure SQL → ADLS
+
+b.Self-Hosted Integration Runtime (SHIR)
+        Used For:
+            On-premises data sources
+            Private network data sources
+        Installed On:
+            On-prem server
+            VM inside private network
+        Example:
+            On-prem SQL Server → Azure Data Lake
+
+c.Azure SSIS Integration Runtime
+        Used For:
+            Running SSIS packages in Azure
+        For organizations migrating from:
+            SQL Server Integration Services (SSIS)
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q11: How to handle failures?
+
+In Azure Data Factory, failure handling is done using:
+a.Activity dependency conditions
+b.Retry policies
+c.Try-Catch logic
+d.Logging & alerting
+e.Stored procedures
+f.Custom error handling
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+🔹 3️⃣ Azure Data Engineering Concepts
+
+Q12: What is Azure Data Lake?
+
+Azure Data Lake is a cloud-based storage solution designed to store large volumes 
+of structured, semi-structured, and unstructured data at any scale.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q13: Difference between Blob Storage and ADLS Gen2?
+
+a.Azure Blob Storage
+It is an object storage service used to store:
+    1.Images
+    2.Videos
+    3.Backups
+    4.Logs
+    5.Documents
+    6.Any binary data
+
+Key Features:
+    1.Flat namespace (no real folder hierarchy)
+    2.Cost-effective
+    3.Good for general-purpose storage
+
+b.Azure Data Lake Storage Gen2
+    1.It is built on top of Blob Storage but includes:
+    2.Hierarchical namespace (true folder structure)
+    3.Optimized for Big Data analytics
+    4.File system semantics
+    5.Fine-grained security using ACLs
+
+Used in:
+    1.Data engineering
+    2.Analytics
+    3.ETL pipelines
+    4.Big data processing
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q14: What is Delta Lake?
+
+Delta Lake is an open-source storage layer built on top of data lakes that provides 
+ACID transactions, schema enforcement, time travel, and support for updates and deletes,
+making data lakes more reliable and production-ready.
+
+Where have you used Delta Lake?
+👉 We used Delta tables in Azure Databricks to store transformed data in Silver and 
+Gold layers. It helped us manage schema evolution, perform upserts using MERGE statements, 
+and maintain data versioning.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q15: What is Partitioning?
+
+Partitioning is a technique used to divide a large table or dataset into smaller, manageable 
+pieces called partitions, based on a specific column.
+It improves:
+    Query performance
+    Manageability
+    Scalability
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+4️⃣ Python (Basic Level Expected)
+
+Q16: Difference between list and tuple?
+    List → mutable
+    Tuple → immutable
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q17: What is Pandas used for?
+    Data manipulation & transformation.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Q18: How do you read CSV in Python?
+    import pandas as pd
+    pd.read_csv("file.csv")
+
+Q19: What is Lambda function?
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+6️⃣ Real Scenario Questions (Very Important)
+
+Q23: How do you optimize slow pipeline?
+    Increase DIU
+    Enable parallel copy
+    Partition large tables
+    Use staging
+    Index source tables
+
+Q24: How do you handle late arriving data?
+    Use buffer window (last 2 days)
+    Use upsert logic
+
+Q25: How do you handle deleted records in incremental load?
+    Soft delete flag
+    Compare source & target using key
+    Use CDC
+
+Q26: Explain your project architecture.
+
+Source (ERP/DB)
+↓
+ADF (ETL)
+↓
+ADLS (Raw → Curated → Gold)
+↓
+Azure Synapse / Power BI
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+DATA WARE HOUSE
+
+31. What is a Fact Table?
+
+A fact table stores transactional or measurable business data like sales amount or quantity.
+ It contains foreign keys referencing dimension tables and is usually very large. It is 
+ mainly used for aggregations and reporting.
+
+Key Characteristics:
+        1.Very large table
+        2.Grows continuously
+        3.Mostly numeric columns
+        4.Used in aggregations (SUM, COUNT, AVG)
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+32. What is a Dimension Table?
+
+A dimension table contains descriptive attributes like customer name, city, product 
+category etc. It provides context to fact data and is used for filtering and grouping 
+in reports.
+
+Characteristics:
+        1.Smaller than fact tables
+        2.Contains descriptive text columns
+        3.Used for filtering and grouping
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+33. What is Star Schema?
+
+Star schema is a data warehouse design where a central fact table connects directly
+to multiple dimension tables. It improves query performance and simplifies reporting.
+
+Why Used?
+    1.Simple design
+    2.Faster queries
+    3.Easy to understand
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+34. What is Snowflake Schema?
+
+Snowflake schema is an extension of star schema where dimension tables are normalized 
+into multiple related tables to reduce redundancy.
+
+Dimension tables are split into sub-dimensions.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+35. What is SCD Type 1?
+
+Slowly Changing Dimension Type 1
+SCD Type 1 overwrites existing data without maintaining history. It is simple but 
+historical changes are lost.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+36. What is SCD Type 2?
+
+SCD Type 2 preserves historical data by inserting a new record when changes occur 
+and expiring the previous record using start and end dates.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+37. What is a Surrogate Key?
+
+A surrogate key is a system-generated unique identifier used in dimension tables 
+instead of business keys to maintain consistency and improve performance.
+
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+
+38. Why Do We Partition Large Tables?
+
+Partitioning splits large tables into smaller segments based on a column like date.
+It improves query performance and reduces scan time.
+
+Purpose:
+    1.Improve query performance
+    2.Manage large datasets
+    3.Faster loading
+    4.Easier maintenance
+
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+
+39. What is Data Skew?
+
+Data skew occurs when data is unevenly distributed across partitions, causing 
+performance bottlenecks in distributed systems.
+
+Solution:
+    Repartition
+    Use salting
+    Choose better partition key
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+40. What is ETL vs ELT?
+
+41. Why is Parquet Better than CSV?
+
+Parquet is columnar, compressed, and schema-aware, making it more efficient for 
+analytics compared to CSV.
+
+CSV:
+    Row-based
+    Larger size
+    No schema
+
+Parquet:
+    Columnar format
+    Compressed
+    Faster queries
+    Stores schema
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+42. What is Columnar Storage?
+
+Columnar storage stores data by columns instead of rows, improving compression and 
+query performance for analytical workloads.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

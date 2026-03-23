@@ -1,6 +1,7 @@
-https://www.youtube.com/watch?v=N-MbyH7EhoQ
+https://www.youtube.com/watch?v=N-MbyH7EhoQ   intelliPaat
+https://www.youtube.com/watch?v=iy6Mcsd5_NA   Shubham Wadekar
 
-intelliPaat
+
 
 1.What is Data Engineering?
 -Designign
@@ -193,6 +194,69 @@ Solution:
 --------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------
 
+8.What is a primary key and a foreign key in relational databases?Why are they 
+important?
+
+A primary key is a column (or set of columns) that uniquely identifies each 
+record in a table.
+-Must be unique
+-Cannot be NULL
+-One primary key per table
+
+A foreign key is a column that references the primary key of another table to 
+create a relationship between tables.
+-Can have duplicate values
+-Can be NULL (depending on design)
+-Enforces referential integrity
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+9.Explain the concept of ACID properties in database transactions?
+
+ACID properties ensure reliable processing of database transactions, preserving 
+data integrity even in failure scenarios.
+-Atomicity: Ensures a transaction is either fully completed or fully rolled back.
+-consistency: Ensures data remains in a valid state before and after a trabsaction.
+-Isolation: Transaction operate independently ,preventing interference from other
+transaction
+-Durability: Once a trabsactionis committed, its changes persist,even in case of system
+failure.
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+10.What is data Partitioning, and why is it used in large-scale data systems?
+
+Data partitioning is the technique of dividing large datasets into smaller, manageable 
+parts (partitions) based on a partition key such as date, region, or ID.
+
+1.Faster Query Performance
+-Queries scan only relevant partitions
+-Reduces full table scans
+
+2. Scalability & Parallel Processing
+-Partitions can be processed in parallel
+-Essential for distributed systems like Apache Spark
+
+3. Efficient Data Management
+-Easy to add, remove, or archive partitions
+-Useful for time-based data (daily/monthly)
+
+4. Cost Optimization
+-Less data scanned → lower compute cost
+-Very important in cloud warehouses
+
+Types----------
+1.Range Partitioning: Dicides data by a specific range of values(eg..dates or IDs)
+2.Hash Partitioning: Uses a hash function to evenly distribute data across partitions
+3.List Partitioning: Categorizes data by predefined values(eg.,regions or departments)
+4.Round-Robin Partitioning: Evenly assigns rows sequentially to paetitons
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+11.
 
 
 
