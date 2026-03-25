@@ -8,7 +8,7 @@ right (NULL if no match)
 Q2: How do you remove duplicates?
 
 select Distinct(column_name)
-from empl;oyee
+from employee
 
 or
 
@@ -90,7 +90,7 @@ Linked Service → Dataset → Pipeline → Activity
 
 Q7: Difference between Dataset and Linked Service?
 
-Linked Service defines the connection information to external data sources, 
+Linked Service defines the connection information to external data sources,
 whereas Dataset defines the structure and location of the data within that source.
 
 ----------------------------------------------------------------------------------
@@ -205,7 +205,7 @@ Used in:
 
 Q14: What is Delta Lake?
 
-Delta Lake is an open-source storage layer built on top of data lakes that provides 
+Delta Lake is an open-source storage layer built on top of data lakes that provides
 ACID transactions, schema enforcement, time travel, and support for updates and deletes,
 making data lakes more reliable and production-ready.
 
@@ -415,6 +415,18 @@ Parquet:
 
 Columnar storage stores data by columns instead of rows, improving compression and 
 query performance for analytical workloads.
+
+
+example:
+👉 Database still:
+
+Reads entire rows from disk
+Then filters only required columns in memory
+
+💡 So internally:
+
+ID, Name, Salary, Dept → ALL read ❌
+Then only Name, Salary returned
 
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------

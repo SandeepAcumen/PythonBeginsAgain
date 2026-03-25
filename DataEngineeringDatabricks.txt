@@ -1,0 +1,57 @@
+to create Metadata - Ansh Lamba (12:08 reffer)
+
+how to create and connect to databricks using assesscontor
+marketplace -> accessconnector  create-> resouce ground -> IAM 
+-> Add role assignment-> Azure Container Storage Contributor ->
+selct Manage -> Add principle -> add accessconnector save
+
+
+metastoreroot@storagemoderndatabrickss.dfs.core.windows.net
+
+/subscriptions/040badba-fd9d-4864-932c-63d5165561cc/resourceGroups/moderndatabricks/providers/Microsoft.Databricks/accessConnectors/accessmoderndatabricks
+
+
+Databricks
+  -control Plane
+  -data Plane
+
+Databricks Unity Catalog
+  -It helps you manage who can access what data
+  (tables, files, models) across your entire data platform.
+
+                        or          
+
+   -Databricks Unity Catalog is a centralized data governance 
+   and access control system in Databricks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
