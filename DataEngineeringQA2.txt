@@ -110,7 +110,7 @@ Q9. What is partitioning?
 
 Q10. How do you optimize slow pipelines?
 
-    I analyze pipeline logs, check data volume, enable parallel copy, and optimize queries to 
+    I analyze pipeline logs, check data volume, enable parallel copy, and optimize queries to
     reduce processing time.
 
     Steps:
@@ -196,6 +196,29 @@ Q21. Why should we hire you?
 
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
