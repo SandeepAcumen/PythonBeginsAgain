@@ -1,0 +1,187 @@
+https://www.youtube.com/watch?v=avdPRFopLNw&list=PLwFJcsJ61ouiU1wvzzRk3pjU8xT9buJhr&index=1
+
+1.What is spark??
+    -Open source distributed computing system for big data processing
+    -unified Analytics engine for processing large-scale datasets
+    -Offers high-speed , in-memory processing capabilities
+    -Handles complex data processing tasks,data transformation,machine learning
+     ,grapg processing,and real-time stram processing.
+
+
+2.Problems Spark solves
+
+
+3.Why Sparks is better than other toolls??
+
+
+4.SparkContext and sparkSession
+
+
+
+5.Create spark sparkSession??
+
+
+from pyspark.sql import sparkSession
+from pyspark.sql import functions as F
+from pyspark.sql.window import window as W
+
+spark = (SparkSession.builder
+.appName= ("datacleaning")
+.config=("spark.sql.session.timeZone","UTC")
+.getOrCreate())
+
+df = (spark.read
+.option=("header" , True)
+.option= ("Inferschema",true)
+.option= ("multiline",true)
+.csv("////")
+)
+
+
+6.Spark RDD and RDD options??? Resilient Distributed Datasets
+
+    -Backbone of data processing in Spark
+    -Distributed ,fault-tolerant and parallelizable data structure
+    -Efficiently processes large datasets across a cluster
+    -Key Characteristics:immutable,Distributed ,resilient,lazily evaluated,fault-tolerant
+
+    RDD Characteristics:
+
+
+https://www.youtube.com/watch?v=cA9JjTgW_rU
+    
+7.What is the role of Driver and Executor in Apache Spark?
+
+👉 Driver is the main program that creates the Spark session, builds the execution plan, and 
+coordinates the entire job.
+
+👉 Executors are worker nodes that run tasks, process data, and return results to the driver.
+
+Driver
+-Converts your code into execution plan (DAG)
+-Schedules tasks
+-Collects final results
+
+Executors
+-Execute tasks in parallel
+-Store data in memory (cache)
+-Send results back to Driver
+
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+8.What is the difference between RDD, DataFrame, and Dataset?
+
+👉 RDD is a low-level distributed data structure with no schema and full control but less optimization.
+
+👉 DataFrame is a structured format with schema (like a table) and is optimized using Catalyst engine.
+
+👉 Dataset is a type-safe version of DataFrame (mainly in Scala/Java) combining RDD flexibility + 
+DataFrame optimization.
+
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+9. What is a Schema in DataFrames?
+
+👉 Schema in a DataFrame defines the structure of data, i.e., column names and their data types.
+
+👉 It helps Spark understand how to read, process, and optimize the data efficiently.
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+10.How are stages created in PySpark?
+
+👉 Stages in PySpark are created based on shuffle boundaries.
+
+👉 Transformations are grouped into a stage until a wide transformation (like join, groupBy) occurs, 
+which triggers a new stage.
+
+Simple Explanation
+-Spark builds a DAG (Directed Acyclic Graph) of operations
+-Then splits it into stages:
+-🔹 Narrow Transformations (same stage)
+    -map(), filter()
+-No data movement between partitions
+    -🔹 Wide Transformations (new stage)
+    -groupBy(), join(), reduceByKey()
+    -Data shuffles across nodes → new stage created
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+11.What are transformations in Spark?
+
+👉 Transformations in Spark are operations that create a new dataset from an existing one.
+
+👉 They are lazy, meaning they don’t execute until an action is triggered.
+
+Transformations = data processing steps
+
+They only build a DAG (execution plan), not run immediately
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+12.What are some optimization techniques used in Spark?
+
+👉 Spark optimization techniques include caching/persisting data, partitioning, avoiding shuffles, and using efficient file formats like Parquet.
+
+👉 It also uses Catalyst optimizer and Tungsten engine to automatically optimize queries and execution.
+
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+13.What is Delta Lake and why is it used?
+
+👉 Delta Lake is an open-source storage layer built on top of data lakes that adds reliability and performance.
+
+👉 It is used to provide ACID transactions, schema enforcement, and versioning (time travel) on big data.
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+14.What is fault tolerance in HDFS?
+
+👉 Fault tolerance in HDFS means the system can continue working even if some nodes fail.
+
+👉 It is achieved by replicating data blocks across multiple DataNodes.
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+15.What do you mean by high availability in distributed systems?
+
+👉 High Availability (HA) means a system is continuously operational with minimal downtime, even if some components fail.
+
+👉 It is achieved using redundancy, failover mechanisms, and load balancing in distributed systems.
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

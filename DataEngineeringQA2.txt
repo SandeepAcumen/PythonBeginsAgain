@@ -197,10 +197,50 @@ Q21. Why should we hire you?
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
 
+Q22. What is difference between Data Lake and Delta Lake?
+
+Data Lake:
+-Stores raw data (structured, semi-structured, unstructured)
+-No built-in support for ACID transactions
+-Data quality and consistency issues can occur
+-Slower performance for updates and queries
+
+Delta Lake:
+-Built on top of a Data Lake (adds a storage layer)
+-Supports ACID transactions (reliable & consistent data)
+-Handles schema enforcement and evolution
+-Provides faster queries with optimizations (like indexing, caching)
+-Supports time travel (versioning of data)    //code - " like version as of 1 "
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q23. What is data profiling?
+        Data profiling is the process of analyzing a dataset to understand its structure, quality, and characteristics
+        before using it.
+        -Checking data types and formats
+        -Identifying missing or null values
+        -Finding duplicates
+        -Understanding data distribution (min, max, averages)
+        -Detecting inconsistencies or anomalies
+  
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q24. what is data governance?
 
 
+Q25. key feature on Quity catalogy?
 
+Q26. Do you know about predicate push down?
 
+Q27. what is dataset?? which one is best data Frame r dats set??
+
+Q28. When you submit the spark job ,when data Frame is created.. what happend after that ?
+
+Q29. what is slating technic??
+
+y dataframe is considerd as immutable??
 
 
 

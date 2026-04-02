@@ -26,6 +26,187 @@ Databricks Unity Catalog
 
 
 
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+What is transformation???
+A transformation is an operation a new datset from existing is 
+one but does not execute immediatly
+
+What is Action???
+An Action is an operation that triggers the actual execution of all pendin
+transformation and returns a result to the driver progroam 
+or writes data to storage
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+What is Narrow vs Wide-transformation????
+
+
+
+
+
+
+What is Partitions and Parallelism???
+
+
+What is Coalesce funtiion???
+    -Remember Coalesce is used to reduce the partitions
+    -Coalesce can only reduce partitions, never increase
+    -perform low data movement
+
+
+What is Managed vs External Tables???
+
+
+What is Medallion Architecture??? Important for interview 
+    filtering the data like its structure and qulity.. and send pass all 3 layers
+    bronze -> silver ->Gold
+    exactly like ETL
+
+What is Unity Catalog???
+    Unity Catalog is a unified governance solution for data and AI
+    assets on the Databricks platform.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+What is ACID???
+    A- Atomicity
+    C- Consistency
+    I- Isolation
+    D- Durability
+
+    Atomicity:
+      All steps in a transaction   succeed together, or they all failures
+      together.No partial completion
+
+    Consistency:
+      transaction move the database from one valid state to another,
+      maintaining all defined rules and constraints.
+
+    Isolation:
+      Concurrent transaction don't interfere with each other.
+      Each transaction feels like its running alone.
+
+    Durability:
+      Once a transaction is committed, it stays committed-even if the system crashes 
+      immediatly after.
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Benifits of Time travel??
+    Audit and Compliance
+    Error Recovery
+    Historical Analysiis
+
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+1. Scenario: Your company needs to move data from an on-premises SQL Server database
+ to an Azure SQL Database daily. How would you set up this data movement in Azure Data Factory?
+      Answer: To set up this data movement:
+
+      -Create a Self-hosted Integration Runtime (IR) to securely connect to the on-premises SQL Server.
+      -Create linked services for both the on-premises SQL Server and Azure SQL Database.
+      -Create datasets for the source and destination tables.
+      -Create a pipeline with a Copy Data activity to move the data.
+      -Schedule the pipeline using a schedule trigger to run daily.
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+2. Scenario: You need to transform data from a CSV file in Azure Blob Storage and load it into an
+ Azure SQL Database. Describe how you would accomplish this using Azure Data Factory.
+
+    Answer: To accomplish this:
+
+      -Create linked services for Azure Blob Storage and Azure SQL Database.
+      -Create datasets for the source CSV file and the destination SQL table.
+      -Create a pipeline with a Data Flow activity.
+      -In the Data Flow, read the data from the CSV file, apply the required transformations, and write the transformed data to the SQL table.
+      -Trigger the pipeline as needed.
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+3. Scenario: Your data pipeline fails intermittently due to network issues. How would you handle 
+this in Azure Data Factory?
+
+Answer: To handle intermittent pipeline failures:
+
+      -Configure retry policies for the affected activities, specifying the maximum retry count and the retry interval.
+      -Use the Set Variable activity to capture and log error details.
+      -Implement conditional activities like If Condition to retry or reroute the process based on error types.
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+4. Scenario: You need to copy data from multiple CSV files stored in an Azure Data Lake Storage 
+Gen2 account to an Azure SQL Database. How would you configure this in Azure Data Factory?
+
+Answer: To configure this data movement:
+
+Create linked services for Azure Data Lake Storage Gen2 and Azure SQL Database.
+Create datasets for the source CSV files and the destination SQL table.
+Use a wildcard in the source dataset to specify multiple CSV files.
+Create a pipeline with a Copy Data activity to move the data from the CSV files to the SQL table.
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+5. Scenario: You have a pipeline that must run only after another pipeline completes successfully.
+ How would you implement this in Azure Data Factory?
+
+Answer: To implement this dependency:
+
+Use Execute Pipeline activity to call the dependent pipeline.
+Set up an activity dependency to ensure that the subsequent pipeline runs only if the previous pipeline completes successfully.
+6. Scenario: Your data transformation logic involves multiple steps, including filtering, aggregation, and joining data from two different sources. How would you implement this in Azure Data Factory?
+
+Answer: To implement complex data transformations:
+
+Create linked services for the data sources.
+Create datasets for the input and output data.
+Create a pipeline with a Mapping Data Flow activity.
+In the Data Flow, add transformations to filter, aggregate, and join the data from the two sources.
+Write the transformed data to the desired output destination.
+7. Scenario: You need to incrementally load data from an on-premises SQL Server to an Azure SQL Database. Explain how you would achieve this in Azure Data Factory.
+
+Answer: To achieve incremental data loading:
+
+Identify a watermark column (e.g., last modified date) in the source table.
+Store the last processed value of the watermark column.
+Create a pipeline with a Copy Data activity.
+Use a dynamic query in the source dataset to filter data based on the stored watermark value.
+Update the watermark value after each successful load.
+8. Scenario: You are tasked with integrating data from various formats (CSV, JSON, Parquet) stored in an Azure Data Lake Storage Gen2 into a single Azure SQL Database table. Describe your approach.
+
+Answer: To integrate data from various formats:
+
+Create linked services for Azure Data Lake Storage Gen2 and Azure SQL Database.
+Create datasets for each file format and the destination SQL table.
+Create a pipeline with multiple Copy Data activities, each handling a different file format.
+Use Data Flow activities to apply necessary transformations and merge the data into a single table.
+9. Scenario: You need to implement a solution that dynamically chooses the source and destination based on input parameters. How would you configure this in Azure Data Factory?
+
+Answer: To configure dynamic source and destination selection:
+
+Create parameters in the pipeline for the source and destination.
+Use parameterized linked services and datasets to reference the source and destination based on input parameters.
+Pass the parameter values at runtime when triggering the pipeline.
+10. Scenario: Your company requires a data pipeline to process and analyze streaming data in near real-time. Explain how you would implement this using Azure Data Factory.
+
+Answer: To implement near real-time data processing:
+
+Use Azure Event Hubs or Azure IoT Hub to ingest streaming data.
+Set up an Azure Stream Analytics job to process the streaming data and write the output to a data store like Azure Blob Storage or Azure SQL Database.
+Use Azure Data Factory to orchestrate the process, periodically running pipelines to load and transform the processed data for further analysis.
+
+
 
 
 
