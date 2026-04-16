@@ -134,7 +134,9 @@ Q11. Difference between Clustered and Non-Clustered Index?
 --------------------------------------------------------------------------------------------------------------
 
 Q12. What is a CTE?
-
+    Common Table Expression
+    A Common Table Expression (CTE) is a temporary result set in SQL that you can reference within a single query. 
+    CTEs simplify complex queries, make them easier to read, and can be reused multiple times within the same query. 
 Q13. What is a window function?
 
     Functions applied across rows related to current row.
@@ -229,21 +231,85 @@ Q23. What is data profiling?
 
 Q24. what is data governance?
 
+    ✅ Real-Time Example (Very Important)
+“In a project, we implemented data governance by controlling access using IAM roles, validating data during ETL pipelines,
+ and storing data in structured formats with proper naming conventions. This ensured only authorized users accessed data 
+ and improved trust in reporting.
 
-Q25. key feature on Quity catalogy?
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+
+Q25. key feature on Unity catalogy?
+
+✅ Key Features of Unity Catalog
+🔹 1. Centralized Data Governance
+Single place to manage data across workspaces
+Unified control for tables, files, and ML models
+
+🔹 2. Fine-Grained Access Control
+Table, column, and row-level security
+Uses role-based access (RBAC)
+
+🔹 3. Data Lineage
+Tracks where data comes from and how it’s used
+Helps in debugging and impact analysis
+
+🔹 4. Audit Logging
+Tracks who accessed what data and when
+Important for compliance and security
+
+🔹 5. Data Discovery
+Central catalog to search datasets easily
+Improves data visibility across teams
+
+🔹 6. Cross-Workspace Sharing
+Share data securely across different Databricks workspaces
+
+🔹 7. Support for Multiple Data Assets
+Tables, views, files, ML models
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 
 Q26. Do you know about predicate push down?
+    👉 Predicate pushdown is an optimization technique where filter conditions (WHERE clause) are pushed down 
+    to the data source, so only required data is read instead of the entire dataset.
 
-Q27. what is dataset?? which one is best data Frame r dats set??
+    ✅ With pushdown: Only rows where country = 'India' are read from source
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Q27. what is dataset?? which one is best dataFrame r data set??
+    A Dataset is a type-safe distributed data structure in Spark, mainly used in Scala/Java. 
+    In practice, DataFrames are preferred—especially in PySpark—because they are easier to use and highly optimized.
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 
 Q28. When you submit the spark job ,when data Frame is created.. what happend after that ?
 
+After creating a DataFrame, Spark builds a logical plan but does not execute it immediately due to lazy evaluation. 
+Once an action is triggered, Spark optimizes the plan using the Catalyst optimizer, converts it into a physical plan,
+ and executes it as a DAG across the cluster.
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 Q29. what is slating technic??
+Salting is a technique used to handle data skew by adding random values to keys, distributing data evenly across 
+partitions for better performance.
 
-y dataframe is considerd as immutable??
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 
+Q30. why dataframe is considerd as immutable??
 
+A DataFrame is immutable because once it is created, its data cannot be changed. Any transformation on a 
+DataFrame returns a new DataFrame instead of modifying the original one.
 
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 
 
 

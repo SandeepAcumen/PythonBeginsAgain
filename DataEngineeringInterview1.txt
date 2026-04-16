@@ -6,7 +6,9 @@ https://www.youtube.com/watch?v=iy6Mcsd5_NA   Shubham Wadekar
 1.What is Data Engineering?
 -Designign
 -storing 
--mainaging
+-managing
+Data Engineering involves designing, building, and maintaining scalable 
+data pipelines and systems to make data available for analysis and business insights.
 --------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------
 2.What is Normalisation??

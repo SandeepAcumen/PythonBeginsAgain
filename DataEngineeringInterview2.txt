@@ -1,0 +1,337 @@
+From phone Screenshot
+
+Round1- L1 (SQL=Python)
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+1.Expalin the use of window functions and write a queryusing them??
+
+Window functions in SQL are used to perform calculations across a set of rows related to the current row,
+without collapsing the result into a single row (unlike GROUP BY).
+
+example:
+    SELECT emp_id,dept,salary,
+    ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC) AS rank
+FROM employees;
+
+example2:
+    SELECT emp_id,dept,salary,
+    RANK() OVER (PARTITION BY dept ORDER BY salary DESC) AS rank,
+    DENSE_RANK() OVER (PARTITION BY dept ORDER BY salary DESC) AS dense_rank
+FROM employees;
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+2.Write a recuursive query to traverse hierarchical employee data??
+
+When you have hierarchical data (like employee → manager relationships),
+you use a recursive CTE (Common Table Expression) to traverse it.
+
+Key Idea of Recursive CTE
+A recursive query has 2 parts:
+    Anchor Query → starting point (top-level employee, e.g., CEO)
+    Recursive Query → joins table with itself to go deeper
+
+    Example:
+        
+        WITH RECURSIVE emp_hierarchy AS (
+    SELECT 
+        emp_id,emp_name,manager_id,
+        CAST(emp_name AS VARCHAR(100)) AS path
+    FROM employees
+    WHERE manager_id IS NULL
+
+    UNION ALL
+
+    SELECT e.emp_id,e.emp_name,e.manager_id,
+        CONCAT(eh.path, ' -> ', e.emp_name)
+    FROM employees e
+    JOIN emp_hierarchy eh
+    ON e.manager_id = eh.emp_id
+)
+
+SELECT * FROM emp_hierarchy;
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+3.Find numbers appearing three times consecutively in a table?
+
+I compare the current row with previous two rows using LAG. If all three are equal, 
+it means the number appears consecutively three times.
+
+example:
+    SELECT DISTINCT num
+FROM (
+    SELECT 
+        num,
+        LEAD(num, 1) OVER (ORDER BY id) AS next1,
+        LEAD(num, 2) OVER (ORDER BY id) AS next2
+    FROM logs
+) t
+WHERE num = next1 
+  AND num = next2;
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+4.solve coding question String,Lists,Dicttionaries??
+
+Google for examples
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+5.Explain python decorators with an example??
+
+A decorator is a function that wraps another function to extend or modify its behavior
+without changing its actual code.
+
+example:
+def decorator_func(func):
+    def wrapper():
+        print("Before execution")
+        func()
+        print("After execution")
+    return wrapper
+
+@decorator_func
+def say_hello():
+    print("Hello")
+
+say_hello()
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+6.Difference between multithreading and Mutiprocessing-when to us e each??
+👉 Multithreading = Multiple threads running within the same process, sharing memory.
+-Threads share same memory space
+-Lightweight & faster to create
+-Affected by Python’s GIL (Global Interpreter Lock)
+
+
+👉 Multiprocessing = Multiple processes running independently with separate memory.
+-Each process has its own memory
+-True parallelism (uses multiple CPU cores)
+-No GIL limitation
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+Round 2 - spark_ pyspark
+
+1.Difference between Broadcast join and shuffile join?
+
+👉 In a Broadcast Join, the small table is sent (broadcasted) to all worker nodes, and the join happens locally on each node.
+-No data shuffle of the large table
+-Very fast when one table is small
+-Used in Spark / distributed systems
+
+👉 In a Shuffle Join, both tables are repartitioned (shuffled) across nodes based on the join key.
+-Data moves across network
+-Expensive operation
+-Used when both tables are large
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+2. What is salting and how does it help with data skew??
+Salting is used to handle data skew by adding a random value to skewed keys, 
+splitting them into multiple smaller keys so the data gets evenly distributed across partitions, 
+improving performance during joins.
+
+When to Use Salting
+✅ Use when:
+-Heavy skew on join keys
+-One key dominates data
+-Jobs taking long due to few partitions
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+3.Explain bloom filter and how they improve join performance??
+
+👉 A Bloom Filter is a probabilistic data structure used to check whether an element might exist in a dataset.
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+4.How does spark memory management work - heap,caching ,GC??
+
+Spark uses a unified memory model inside JVM heap, divided into execution and storage memory. 
+Execution memory is used for operations like shuffle and joins, while storage memory is used for caching and persistence. 
+Spark allows dynamic sharing between them. Garbage collection manages memory cleanup, but excessive GC can slow down jobs.
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+5. Differnce between spark context and saprk session??
+
+SparkContext is the original entry point used for RDD-based operations, 
+while SparkSession is the unified entry point introduced in Spark 2.0 that supports DataFrames, SQL, and 
+integrates SparkContext internally. In modern Spark, we primarily use SparkSession.
+
+👉 SparkContext is the entry point to Spark (older versions).
+Introduced in Spark 1.x
+    Used to:
+        -Connect to cluster
+        -Create RDDs (Resilient Distributed Dataset)
+        -Core low-level API
+
+👉 SparkSession is the unified entry point (Spark 2.x+).
+Combines:
+    -SparkContext
+    -SQLContext
+    -HiveContext
+Used for:
+    -DataFrames
+    -SQL queries
+    -Modern Spark APIs
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+6.explain repartiotion vs coalesce with use cases??
+
+Repartition performs a full shuffle and is used when we need to increase partitions or evenly distribute data. 
+Coalesce is a narrow transformation used to reduce partitions without shuffle, making it more efficient but potentially uneven.
+
+👉 repartition() is used to increase or decrease partitions with a full shuffle.
+-Data is randomly redistributed
+-Ensures even distribution
+-Expensive (network + shuffle)
+
+👉 coalesce() is used to reduce partitions without full shuffle.
+-Avoids heavy data movement
+-Faster
+-May lead to uneven partitions
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+7.Integrating pyspark with snowflake -best pratices??
+
+When integrating PySpark with Snowflake, I focus on pushing computation to Snowflake using predicate pushdown,
+ minimizing data transfer with column pruning, tuning parallelism, and ensuring secure credential handling.
+  I also optimize warehouse size and monitor performance using Spark UI and Snowflake query history.
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+8.Write pysprak code to join two Dataframes and use window functions for ranking?
+
+Step1: join two dataframes
+dept_df = spark.createDataFrame(dept_data, ["dept_id", "dept_name"])
+
+Step 2: Join Two DataFrames
+joined_df = emp_df.join(dept_df, on="dept_id", how="inner")
+
+Step 3: Apply Window Function (Ranking)
+window_spec = Window.partitionBy("dept_id").orderBy(col("salary").desc())
+
+ranked_df = joined_df.withColumn(
+    "rank",
+    row_number().over(window_spec)
+)
+
+Step 4: Show Output
+ranked_df.show()
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+9.Solve tranformation tasks in notepade(no IDE) - logic clarity and syntax precision were tested?
+
+When solving transformations without an IDE, I focus on writing clean, step-by-step PySpark transformations 
+with correct syntax, proper imports, and clear logical flow. I ensure readability and avoid syntax errors by 
+structuring the code carefully.
+
+👉 In interviews, this tests your ability to:
+
+Write correct PySpark/SQL logic without execution
+Maintain syntax accuracy
+Show clear step-by-step transformations
+
+🔹 What Interviewers Expect ⭐
+Clean, readable code
+Correct imports
+Proper chaining of transformations
+No syntax mistakes
+Logical flow (very important)
+
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+10.Whu watermark instead of Tumblin Window??
+
+select * from person where LastModifytime > 
+'@{activity('Lookupoldwatermarkactivity').output.firstRow.WatermarkValue}' and
+ LastModifytime <= 
+ '@{activity('Lookupnewwatermarkactivity').output.NewWatermarkvalue}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,186 @@
+--Source Table
+create table person
+(
+    PersonID int,
+    Name varchar(255),
+    LastModifytime datetime
+);
+
+Insert into person
+    (PersonID,Name,LastModifytime)
+VALUES
+    (1,'aaa','9/1/2017 12:56:00 AM'),
+    (2,'bbb','9/2/2017 5:26:00 AM'),
+    (3,'ccc','9/3/2017 7:11:00 AM'),
+    (4,'ddd','9/4/2017 3:46:00 AM'),
+    (5,'eee','9/5/2017 12:16:00 AM');
+
+
+--Watermark table
+
+create table watermarktable
+(
+    TableName varchar(255),
+    WatermarkValue datetime
+);
+
+INSERT INTO watermarktable
+VALUES ('person','1900-01-01 00:00:00')
+
+--Stored Procedure
+
+Create Procedure usp_write_watermark
+@LastModifiedtime datetime,
+@TableName varchar(50)
+AS
+
+Begin
+UPDATE watermarktable
+SET WatermarkValue = @LastModifiedtime
+WHERE TableName = @TableName
+
+END
+
+
+--lookupName1
+    LookupOldWaterMarkActivity
+    --Query
+    select * from watermarktable where TableName = 'person'
+
+--loopupname2
+    LookupnewWaterMarkActivity
+    --Query
+        select max(LastModifytime) as NewWatermarkvalue from person
+
+--Copy
+
+    select * from person where LastModifytime > 
+    '@{activity('LookupOldWaterMarkActivity').output.firstRow.WatermarkValue}' and
+ LastModifytime <= 
+ '@{activity('LookupNewWaterMarkActivity').output.firstRow.NewWatermarkvalue}'
+
+
+--StoreProcedure
+
+    @{activity('LookupNewWaterMarkActivity').output.firstRow.NewWatermarkvalue}
+    @{activity('LookupOldWaterMarkActivity').output.firstRow.TableName}
+
+
+
+
+
+-------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+2.Incremental Load without Watermark Table  or Metadata
+
+--Create Source Table
+
+CREATE TABLE Source_Orders (
+    OrderID INT,
+    CustomerName VARCHAR(100),
+    OrderAmount DECIMAL(10,2),
+    LastModifiedDate DATETIME
+);
+
+INSERT INTO Source_Orders VALUES
+(1,'Ravi',1000,'2026-01-01 10:00:00'),
+(2,'Anita',1500,'2026-01-02 11:00:00'),
+(3,'John',2000,'2026-01-03 09:30:00');
+
+--Create Target Table
+
+CREATE TABLE Target_Orders (
+    OrderID INT,
+    CustomerName VARCHAR(100),
+    OrderAmount DECIMAL(10,2),
+    LastModifiedDate DATETIME
+);
+
+
+--Lookup1 
+
+SELECT ISNULL(MAX(LastModifiedDate), '1900-01-01 00:00:00') AS MaxLastModifiedDate
+FROM Target_Orders;
+
+--Copy
+
+SELECT * FROM Source_Orders
+WHERE LastModifiedDate > '@{activity('Lookup1').output.firstRow.MaxLastModifiedDate}'
+
+
+
+INSERT INTO Source_Orders VALUES
+(4, 'Mallaiah', 3000, '2026-01-04 08:15:00');
+
+UPDATE Source_Orders
+SET OrderAmount = 1800,
+    LastModifiedDate = '2026-01-04 09:00:00'
+WHERE OrderID = 2;
+
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+3.Skip Copy Activity When No New Data Exists
+
+CREATE TABLE Source_Orders (
+    OrderID INT,
+    CustomerName VARCHAR(100),
+    OrderAmount DECIMAL(10,2),
+    LastModifiedDate DATETIME
+);
+
+
+
+INSERT INTO Source_Orders VALUES
+(1, 'Ravi', 1000, '2026-01-01 10:00:00'),
+(2, 'Anita', 1500, '2026-01-02 11:00:00'),
+(3, 'John', 2000, '2026-01-03 09:30:00');
+
+
+CREATE TABLE Target_Orders (
+    OrderID INT,
+    CustomerName VARCHAR(100),
+    OrderAmount DECIMAL(10,2),
+    LastModifiedDate DATETIME
+);
+
+
+
+Step1:
+SELECT ISNULL(MAX(LastModifiedDate), '1900-01-01 00:00:00') AS MaxLastModifiedDate
+FROM Target_Orders;
+
+
+Step2:
+SELECT COUNT(1) AS IncrementalCount
+FROM Source_Orders
+WHERE LastModifiedDate 
+'@{activity('Lookup1').output.firstRow.MaxLastModifiedDate}'
+
+step3:
+@greater(
+activity('Lookup2').output.firstRow.IncrementalCount,
+0
+)
+
+
+step4:
+SELECT COUNT(1) AS IncrementalCount
+FROM Source_Orders
+WHERE LastModifiedDate 
+'@{activity('Lookup1').output.firstRow.MaxLastModifiedDate}'
+
+
+
+Before Run3:
+
+INSERT INTO Source_Orders VALUES
+(4, 'Mallaiah', 3000, '2026-01-04 08:15:00');
+
+UPDATE Source_Orders
+SET OrderAmount = 1800,
+    LastModifiedDate = '2026-01-04 09:00:00'
+WHERE OrderID = 2;
